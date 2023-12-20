@@ -13,21 +13,17 @@ async function getData(URL) {
   }
 }
 
-/* getData(URL);
+ getData(URL);
 
  function displayresults(data) {
    data.forEach((marvel) => {
-    const marveltitles = marvel.title.map((comic) => comic.title);\
-    const html = `
-    
-    
-               
-    `
+    const marveltitles = marvel.title.map((comic) => comic.title);
+    console.log(marveltitles)
+
 
    })
  }
 
- */
 
 /*https://gateway.marvel.com:443/v1/public/characters?apikey=09a4303b1ef760690190a1ab65d7eafc&hash=*/
 /*https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1*/
