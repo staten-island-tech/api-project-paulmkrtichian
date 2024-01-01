@@ -44,13 +44,10 @@ async function searchComicByTitle(URL, searchTerm) {
   try {
     const response = await fetch(URL);
     const data = await response.json();
-
-    
     const filteredComics = data.data.results.filter(comic =>
       comic.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    displayComics(filteredComics);
+     displayComics(filteredComics);
   } catch (error) {
     console.error(error);
   }
@@ -61,24 +58,7 @@ function displayComics(comics) {
   appElement.innerHTML = '';
   comics.forEach(comic => {
     const comicElement = document.createElement('div');
-    comicElement.innerHTML = `
-      <h3>${comic.title}</h3>
-      <p>${comic.description}</p>
-      <p>${comic.urls}
-      <p>${comic.issueNumber}
-      <hr />
-    `;
-    appElement.appendChild(comicElement);
-  });
-}
-
-function displayComics(comics) {
-  const appElement = document.getElementById('app');
-  appElement.innerHTML = '';
-
-  
-  comics.forEach(comic => {
-    const comicElement = document.createElement('div');
+    comicElement.className = 'comic-box'
     comicElement.innerHTML = `
       <h3>${comic.title}</h3>
       <img src="${getComicImageSrc(comic)}" alt="${comic.title}" />
