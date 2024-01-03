@@ -50,6 +50,7 @@ async function searchComicByTitle(URL, searchTerm) {
      displayComics(filteredComics);
   } catch (error) {
     console.error(error);
+    
   }
 }
 
@@ -64,6 +65,7 @@ function displayComics(comics) {
       <img src="${getComicImageSrc(comic)}" alt="${comic.title}" />
       
       <p> Issue Number : ${comic.issueNumber}
+      
       <hr />
     `;
     appElement.appendChild(comicElement);
@@ -75,3 +77,4 @@ function getComicImageSrc(comic) {
 }
 
 
+//<p> Description : ${comic.description} </p>
