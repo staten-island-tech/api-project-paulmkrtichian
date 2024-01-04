@@ -36,16 +36,16 @@ async function getData(URL) {
 const URL = `https://gateway.marvel.com/v1/public/comics?ts=1&apikey=09a4303b1ef760690190a1ab65d7eafc&hash=3a1cadafb0cb19882d6df0a72dda0f43&limit=100`;
 
 document.getElementById('search').addEventListener('click', () => {
-  const searchTerm = document.getElementById('comicTitle').value;
-  searchComicByTitle(URL, searchTerm);
+  const search = document.getElementById('comicTitle').value;
+  searchComicByTitle(URL, search);
 });
 
-async function searchComicByTitle(URL, searchTerm) {
+async function searchComicByTitle(URL, search) {
   try {
     const response = await fetch(URL);
     const data = await response.json();
     const filteredComics = data.data.results.filter(comic =>
-      comic.title.toLowerCase().includes(searchTerm.toLowerCase())
+      comic.title.toLowerCase().includes(search.toLowerCase())
     );
      displayComics(filteredComics);
   } catch (error) {
@@ -63,8 +63,10 @@ function displayComics(comics) {
     comicElement.innerHTML = `
       <h3>${comic.title}</h3>
       <img src="${getComicImageSrc(comic)}" alt="${comic.title}" />
-      
-      <p> Issue Number : ${comic.issueNumber}
+      <p> Description : ${getdescription(comic)} </p>
+      <p> Issue Number : ${comic.issueNumber}</p>
+      <p> Price: ${pprices(comic)}</p>
+    
       
       <hr />
     `;
@@ -75,6 +77,14 @@ function displayComics(comics) {
 function getComicImageSrc(comic) {
   return `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
 }
-
-
-//<p> Description : ${comic.description} </p>
+function pprices(comics) {
+  if (comics.prices && comics.prices.length > 0) {
+    return `${comics.prices[0].price}$`;
+  }
+  if (comics.prices === 0){
+    return 'No price avaible';
+  }
+}
+function getdescription(comic) {
+  return comic.description || 'No description available';
+}
