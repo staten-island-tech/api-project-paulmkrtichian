@@ -61,7 +61,7 @@ function displayComics(comics) {
     const comicElement = document.createElement('div');
     comicElement.className = 'comic-box'
     comicElement.innerHTML = `
-      <h3>${comic.title}</h3>
+      <h2>${comic.title}</h2>
       <img src="${getComicImageSrc(comic)}" alt="${comic.title}" />
       <p> Description : ${getdescription(comic)} </p>
       <p> Issue Number : ${comic.issueNumber}</p>
