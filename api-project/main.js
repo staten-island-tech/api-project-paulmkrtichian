@@ -24,10 +24,10 @@ async function getData(URL) {
 //PUBLIC: 09a4303b1ef760690190a1ab65d7eafc
 //Private: 02fdb37face372fee7c6e1cf85f2f2d451c89c3a
 //Hash: 3a1cadafb0cb19882d6df0a72dda0f43
- 
 
-const URL = 'https://gateway.marvel.com/v1/public/comics?ts=1&apikey=09a4303b1ef760690190a1ab65d7eafc&hash=3a1cadafb0cb19882d6df0a72dda0f43&limit=100';
-const appElement = document.getElementById('app');
+const URL =
+  "https://gateway.marvel.com/v1/public/comics?ts=1&apikey=09a4303b1ef760690190a1ab65d7eafc&hash=3a1cadafb0cb19882d6df0a72dda0f43&limit=100";
+const appElement = document.getElementById("app");
 
 async function getData(URL) {
   try {
@@ -56,10 +56,10 @@ async function getData(URL) {
   });
 }*/
 function putcomics(comics) {
-  appElement.innerHTML = '';
+  appElement.innerHTML = "";
   comics.forEach((comic, index) => {
-    const comicElement = document.createElement('div');
-    comicElement.className = 'comic-box';
+    const comicElement = document.createElement("div");
+    comicElement.className = "comic-box";
     comicElement.innerHTML = `
       <h2>${comic.title}</h2>
       <img src="${getimage(comic)}" alt="Comic Image ${index + 1}" />
@@ -78,24 +78,27 @@ function getimage(comic) {
 //thumbnail.path amd thumbnail.extension is a part of the API. This function creats the image for each comic.
 
 function pprices(comic) {
-  const price = (comic.prices && comic.prices.length > 0) ? comic.prices[0].price : 0;
-  return (price === 0) ? 'Not available' : `${price}$`; //If price is 0, "Not Avaible" will be displayed in the price section
+  const price =
+    comic.prices && comic.prices.length > 0 ? comic.prices[0].price : 0;
+  return price === 0 ? "Not available" : `${price}$`; //If price is 0, "Not Avaible" will be displayed in the price section
 }
 
 function getdescription(comic) {
-  return comic.description || 'No description available';
+  return comic.description || "No description available";
 }
 // || means or ^^^^
 
-document.getElementById('search').addEventListener('click', async () => {
-  const search = document.getElementById('comicTitle').value.toLowerCase();
+document.getElementById("search").addEventListener("click", async () => {
+  const search = document.getElementById("comicTitle").value.toLowerCase();
   const comics = await getData(URL);
-  const filteredComics = comics.filter(comic => comic.title.toLowerCase().includes(search));
+  const filteredComics = comics.filter((comic) =>
+    comic.title.toLowerCase().includes(search)
+  );
   putcomics(filteredComics);
 });
 //When inputting the data, lower case letters will work too, increasing accessbility
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const allComics = await getData(URL);
   putcomics(allComics);
 });
