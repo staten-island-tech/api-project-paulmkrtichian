@@ -86,7 +86,7 @@ function pprices(comic) {
 function getdescription(comic) {
   return comic.description || "No description available";
 }
-// || means or ^^^^
+// || means "or" ^^^^
 
 document.getElementById("search").addEventListener("click", async () => {
   const search = document.getElementById("comicTitle").value.toLowerCase();
